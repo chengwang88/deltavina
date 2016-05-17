@@ -2,6 +2,9 @@
 Pharmacophore type assignment for protein and ligand.
 """
 
+__author__ = "Cheng Wang"
+__copyright__ = "Copyright 2016, NYU"
+__license__ = ""
 
 #-----------------------------------------------------------------------------
 # Imports
@@ -39,14 +42,25 @@ class pharma:
         self.AtomPharma = {}
 
 
-    def assign(self):
+    def assign(self, write = False, outfn = 'tmp.pdb'):
         """Assign pharmacophore type.
         
         Details description of pharmacophore assign are commented in code.
         
+        Parameters
+        ----------
+        write : logic 
+            Control to write the filtered PDB after pharmacophore assignment
+            Remove atoms not in element list
+        outfn : str
+            Output PDB file name with default 'tmp.pdb'
+            
         Returns
         ---------
-        self
+        AtomIdx : list
+            Atom index in the structure
+        AtomPharma : dict
+            Dict with atom index as key and pharmacophore type as value
         
         """
         # Nine element will be used in the study
@@ -212,11 +226,20 @@ class pharma:
             self.AtomPharma[atom.idx] = [atom.atomicnum, p, atom.coords]
             #print atom.idx, AtomPharma[atom.idx]
             #print atom.idx, atom.type,  p, atom.OBAtom.GetResidue().GetName()
-    
-        return self
+
+        if write:
+            for idx in self.AtomIdx[::-1]:
+                if self.AtomPharma[idx][0] not in elementint:
+                    mol.OBMol.DeleteAtom(mol.OBMol.GetAtom(idx))
+            
+            output = pybel.Outputfile("pdb", outfn, overwrite=True)
+            output.write(mol)
+            output.close()
+            
+        return self.AtomIdx, self.AtomPharma
 
 
-    def write(self):
+    def writePharma(self):
         """Write PDB with pharmacophore type with extension .pharma.pdb
         
         TODO
