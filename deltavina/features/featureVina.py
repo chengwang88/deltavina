@@ -22,9 +22,20 @@ MGLUTIL = "/Users/chengwang/sw/mgltools_i86Darwin9_1.5.6/MGLToolsPckgs/AutoDockT
 VINADIR = "/Users/chengwang/Dropbox/ws/scoref/vina/v1/build/mac/release/"
 
 def runVina(protpdbqt, ligpdbqt):
-    """Run modified AutoDock Vina program with 58 features
+    """Run modified AutoDock Vina program with Vina score and 58 features
     
-    
+    Parameters
+    ----------
+    protpdbqt : str
+        PDBQT file name of protein
+    ligpdbqt : str
+        PDBQT file name of ligand
+        
+    Returns
+    ----------
+    vinalist : list[float]
+        Vina score and 58 features by Vina
+        
     """
     cmd = VINADIR + "vina --receptor " + protpdbqt + " --ligand " + ligpdbqt + \
           " --score_only > score_v1.tmp"
@@ -41,6 +52,13 @@ def runVina(protpdbqt, ligpdbqt):
 
 def prepareProt(inprot, protpqdbt):
     """Prepare protein PDBQT file by MGLTools
+   
+    Parameters
+    ----------
+    inprot : str
+        Input file name of protein
+    protpqdbt : str
+        Output PDBQT file name of protein
     
     """
     cmd = MGLPY + " "  + MGLUTIL + "prepare_receptor4.py -r "  + inprot + \
@@ -52,18 +70,32 @@ def prepareProt(inprot, protpqdbt):
 def prepareLig(inlig, ligpdbqt):
     """Prepare ligand PDBQT file by MGLTools
     
+    Parameters
+    ----------
+    inlig : str
+        Input file name of ligand
+    ligpqdbt : str
+        Output PDBQT file name of ligand
+        
     """
     cmd = MGLPY + " "  + MGLUTIL + "prepare_ligand4.py -l " + inlig  + \
           " -o " + ligpdbqt +  " -U 'nphs' > out2.tmp"
     os.system(cmd)
 
 
-def featureVina(inprot, inlig):
+def featureVina(inprot, inlig, num = 10):
+    """Get Vina score and Vina features
+    
+    Parameters
+    ----------
+    inprot : str
+        Input file name of protein
+    inlig : str
+        Input file name of ligand
+    num : int
+        Number of features to output 
+       
     """
-    
-    
-    """
-    
     fprot, __ = os.path.splitext(inprot)
     flig, __ = os.path.splitext(inlig)
 

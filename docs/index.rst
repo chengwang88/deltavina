@@ -3,19 +3,21 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-DeltaVina documentation!
+DeltaVina
 ==============================================
 
-Contents:
+
+
+
+
+
+For API docs, see here:
 
 .. toctree::
    :maxdepth: 2
 
-   getting-started
-   commands
-
-
-
+   deltavina
+   
 Indices and tables
 ==================
 

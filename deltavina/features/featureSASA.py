@@ -232,7 +232,7 @@ def featureSASA(inprot, inlig, write=False):
 if __name__ == "__main__":
     
     testdir = 'tests/1a42/'
-    inprot = testdir + '1a42_protein_proc3.pdb'
+    inprot = testdir + '1a42_protein_proc_se.pdb'
     inlig = testdir + '1a42_ligand_fix.mol2'
 
     print featureSASA(inprot, inlig)
