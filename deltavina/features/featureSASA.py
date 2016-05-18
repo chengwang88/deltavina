@@ -124,57 +124,7 @@ def runMSMS(inprot, inlig, MSMSDIR = '.'):
     os.chdir('../')
     os.system('rm -rf tmp')
     return df
-    
-
-def writeSA2PDB(inpdb, inmol2):
-    df = runMSMS(inpdb, inmol2)
-    
-    dd = datadir + fn + "/sasa2/" + fn
-    ppdb2 = dd + '_protein_sa.pdb'
-    lpdb2 = dd + '_ligand_sa.pdb'
-    plpdb2 = dd + '_complex_sa.pdb'
-    
-    atomlist = []
-    # write complex_sa.pdb
-    f = open(plpdb2, "w")
-    with open(ppdb2) as g:
-        for lines in g:
-            if lines[0:3] == 'TER':
-                f.write(lines)
-            elif lines[0:3] in ['ATO', 'HET']:
-                f.write(lines)
-                atomlist.append(lines[7:20])
-                
-    g.close()
-    with open(lpdb2) as g:
-        for lines in g:
-            if lines[0:3] == 'TER':
-                f.write(lines)
-            elif lines[0:3] in ['ATO', 'HET']:
-                f.write(lines)
-                atomlist.append(lines[7:20])
-    g.close()
-    f.close()
-    
-    ploutpdb = dd + '_complex_sa_extra.pdb'
-    
-    df["d3"] = (df["pl3"] - df["c3"]).clip(0,None)
-    value = list(df['d3'])
-    
-    atomdict = {i: np.round(j,2) for i,j in zip(atomlist, value)}
-    
-    f = open(ploutpdb, "w")
-    
-    with open(plpdb2) as g:
-        for lines in g:
-            if lines[0:3] in ['ATO', 'HET']:
-                line = lines[0:60] + '%6.2f' + lines[66:]
-                f.write(line %(atomdict[lines[7:20]]))
-            else:
-                f.write(lines)
-    g.close()
-    f.close()
-    
+        
     
 def featureSASA(inprot, inlig, write=False):
     """Group the SASA by pharmacophore type
@@ -226,7 +176,37 @@ def featureSASA(inprot, inlig, write=False):
         f.write(" ".join([str(np.round(i,2)) for i in sasalist]) + "\n")
         f.close()
     
-    return sasalist
+    return df, sasalist
+
+
+class sasa:
+    """Buried SASA features
+    
+    """
+    
+    def __init__(self, prot, lig):
+        """Pharmacophore based buried SASA Features
+        
+        Parameters
+        ----------
+        prot : str
+            protein structure
+        lig : str
+            ligand structure
+            
+        """
+        self.prot = prot
+        self.lig = lig
+        
+        self.rawdata, self.sasalist = featureSASA(self.prot, self.lig)     
+        
+        self.sasaTotal = self.sasalist[-1]
+        self.sasaFeatures = self.sasalist[0:-1]
+
+    def info(self):
+        """Feature list"""
+        featureInfo = ['P', 'N', 'DA', 'D', 'A', 'AR', 'H', 'PL', 'HA']
+        return featureInfo
 
 
 if __name__ == "__main__":
@@ -235,4 +215,10 @@ if __name__ == "__main__":
     inprot = testdir + '1a42_protein_proc_se.pdb'
     inlig = testdir + '1a42_ligand_fix.mol2'
 
-    print featureSASA(inprot, inlig)
+    s = sasa(inprot, inlig)
+    print s.sasalist
+    print s.sasaTotal
+    print s.sasaFeatures
+    print s.info()
+    
+    
