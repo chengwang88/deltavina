@@ -66,7 +66,6 @@ def prepareProt(inprot, protpqdbt):
     os.system(cmd)
 
 
-
 def prepareLig(inlig, ligpdbqt):
     """Prepare ligand PDBQT file by MGLTools
     
