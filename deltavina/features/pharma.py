@@ -247,7 +247,7 @@ class pharma:
         * Support write .pharm.pdb with mol2 input
         
         """
-        AtomIdx, AtomPharma = pharmaAssign(fn)
+        AtomIdx, AtomPharma = self.assign()
         
         # new pdb file
         ftmp, fext = os.path.splitext(self.fn)
@@ -259,13 +259,13 @@ class pharma:
         outfn = ftmp + ".pharma.pdb"
 
         f = open(outfn, "w")
-        with open(fn) as g:
+        with open(self.fn) as g:
             for lines in g:
                 if lines[0:6] in ['ATOM  ', 'HETATM']:
                     atmi = int(lines[6:11])
                     #reschain = lines[17:26]
                     lines = lines[0:76] + "%2s" + lines[78:]
-                    f.write(lines %(self.AtomPharma[atmi]))
+                    f.write(lines %(self.AtomPharma[atmi][1]))
                 else:
                     f.write(lines)
         f.close()
@@ -274,17 +274,23 @@ class pharma:
 
 def test():
 
-    print """Test: protein pocket pharmacophore for write implementation """
+    print """Test: pharam module """
     
-    datadir = "/Users/chengwang/Dropbox/ws/scoref/v13/test/"
-    pdblist = ['1a8i']
-    for pdb in pdblist:
-        fn = datadir + pdb + '/1a8i_protein.pdb'
-        AtomIdx, AtomPharma = pharmaAssign(fn, write=True)
-        fn = datadir + pdb + '/1a8i_decoys_native.mol2'
-        AtomIdx, AtomPharma = pharmaAssign(fn, write=True)     
+    pwd = os.getcwd()
+    print pwd
+    
+    fn = pwd + "/tests/1a42/1a42_protein_proc_se.pdb" 
+    p = pharma(fn)
+    AtomIdx, AtomPharma = p.assign()
+    p.writePharma()
 
-    print """End of test4""" 
+    fn = pwd + "/tests/1a42/1a42_ligand_fix.mol2" 
+    p = pharma(fn)
+    AtomIdx, AtomPharma = p.assign()
+    # p.writePharma() wirte is not supported for mol2
+    print AtomPharma
+
+    print """End of test""" 
 
 
 
