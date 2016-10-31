@@ -1,8 +1,7 @@
-library(caret)
 library(randomForest)
 
 # load the model
-load('rffit.rda')
+load('/Users/chengwang/Dropbox/ws/dvdep/deltavina/deltavina/models/rffit.rda')
 
 # input and output file name
 infn = 'input.csv'
