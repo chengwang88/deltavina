@@ -26,7 +26,6 @@ parser.add_option("-g", "--group",  help="a list of receptor-ligand pairs  ")
 (options, args) = parser.parse_args()
 options =  options.__dict__
 
-
 # assign args to pdblist
 pdblist = []
 if options['group'] is None:
@@ -37,17 +36,11 @@ if options['group'] is None:
         pdblist.append([options['receptor'], options['ligand']])
 else:
     # one or more protein-ligand complex
-    with open(options, 'r') as f:
+    with open(options['group'], 'r') as f:
         for lines in f:
             pdblist.append(lines.split()[0:2])
 print pdblist
 
 modelDV.runDV(pdblist)
 
-if __name__ == "__main__":
-    
-    testdir = 'tests/1a42/'
-    inprot = testdir + '1a42_protein_proc_se.pdb'
-    inlig = testdir + '1a42_ligand_fix.mol2'
 
-    #modelDV.runDV(inprot, inlig)

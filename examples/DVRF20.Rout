@@ -17,6 +17,8 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+[Previously saved workspace restored]
+
 > library(randomForest)
 randomForest 4.6-12
 Type rfNews() to see new features/changes/bug fixes.
@@ -60,4 +62,4 @@ Type rfNews() to see new features/changes/bug fixes.
 > 
 > proc.time()
    user  system elapsed 
-  1.062   0.082   1.199 
+  1.356   0.090   1.473 

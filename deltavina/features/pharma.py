@@ -21,7 +21,7 @@ import openbabel as ob
 class pharma:
     """Pharmacophore Type Assignment for Protein and Ligand
     
-    This class is to assign the pharmacophore type 
+    This class is to assign the atom pharmacophore type 
     
     Parameters
     ----------
@@ -31,8 +31,9 @@ class pharma:
     References
     ----------
     .. [1] Our paperReference of Dock
-    .. [2] Reference of Dock
-
+    .. [2] Pharmacophore-Based Similarity Scoring for DOCK
+           J. Phys. Chem. B 2015, 119, 1083-1102
+           dx.doi.org/10.1021/jp506555w
     """
     def __init__(self, fn):
         self.fn = fn
