@@ -42,7 +42,7 @@ def runVina(protpdbqt, ligpdbqt):
     with open("score_v1.tmp", "r") as f:
         for lines in f:
             if lines[0:4] in ["Affi", "Term"]:
-                vinalist.append(float(lines.split()[2]))
+                vinalist.append(float(lines.split()[1]))
     os.system('rm *.tmp')
 
     return vinalist
