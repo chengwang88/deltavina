@@ -28,4 +28,16 @@ Project Organization
     │       └── tests
     │
     └── examples           <- Examples
+
+
+How to use
+-------
+Please see the Tutorial.pdf or visit http://www.nyu.edu/projects/yzhang/DeltaVina
+
+
+
+Reference
+---------
+Cheng Wang, and Yingkai Zhang, J. Comput. Chem., 2016, DOI: 10.1002/jcc.24667 
+Improving Scoring-Docking-Screening Powers of Protein–Ligand Scoring Functions using Random Forest
     
