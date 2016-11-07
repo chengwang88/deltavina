@@ -1,7 +1,7 @@
 DeltaVina
 ======
 
-A scoring function for protein-ligand rescoring.
+A scoring function for rescoring protein-ligand binding affinity.
 
 Project Organization
 ------------
@@ -32,7 +32,7 @@ Project Organization
 
 How to use
 -------
-Please see the Tutorial.pdf or visit http://www.nyu.edu/projects/yzhang/DeltaVina
+Please see the DeltaVinaTutorial.pdf or visit http://www.nyu.edu/projects/yzhang/DeltaVina
 
 
 
