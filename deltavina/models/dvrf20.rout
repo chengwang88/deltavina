@@ -62,4 +62,4 @@ Type rfNews() to see new features/changes/bug fixes.
 > 
 > proc.time()
    user  system elapsed 
-  1.468   0.086   1.661 
+  1.386   0.067   1.445 

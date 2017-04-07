@@ -38,6 +38,7 @@ Please see the DeltaVinaTutorial.pdf or visit http://www.nyu.edu/projects/yzhang
 
 Reference
 ---------
-Cheng Wang, and Yingkai Zhang, J. Comput. Chem., 2016, DOI: 10.1002/jcc.24667 
-Improving Scoring-Docking-Screening Powers of Protein–Ligand Scoring Functions using Random Forest
+Cheng Wang, and Yingkai Zhang, J. Comput. Chem. 2017, 38, 169-177.
+
+[Improving Scoring-Docking-Screening Powers of Protein–Ligand Scoring Functions using Random Forest](http://onlinelibrary.wiley.com/doi/10.1002/jcc.24667/abstract)
     
